@@ -29,7 +29,6 @@ namespace WPF_Google_Music
                 {
                     Javascript = true,
                     AllowInsecureContent = true,
-                    CustomCSS = "#gbx3,gbz,gbzw { display: none !important; }",
                     WebAudio = true,
                     Plugins = true
                 });
@@ -40,6 +39,21 @@ namespace WPF_Google_Music
         private void Browser_OnLoaded(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        public void PlayPressed()
+        {
+            Browser.ExecuteJavascript("alert('Play pressed!');");
+        }
+
+        public void NextPressed()
+        {
+            Browser.ExecuteJavascript("alert('Next pressed!');");
+        }
+
+        public void PrevPressed()
+        {
+            Browser.ExecuteJavascript("alert('Prev pressed!');");
         }
     }
 }
