@@ -3,11 +3,15 @@
               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
               xmlns:metro="http://schemas.codeplex.com/elysium"
               xmlns:params="http://schemas.codeplex.com/elysium/params"
-              params:Design.Theme="Dark"
-              params:Design.AccentBrush="{x:Static metro:AccentBrushes.Blue}"
+              xmlns:awe="http://schemas.awesomium.com/winfx"
+              xmlns:core="clr-namespace:Awesomium.Core;assembly=Awesomium.Core"
+              xmlns:local="clr-namespace:WPF_Google_Music"
+              params:Design.Theme="Light"
+              params:Design.AccentBrush="{x:Static metro:AccentBrushes.Purple}"
               params:Design.ContrastBrush="White"
-              Title="MainWindow" Height="350" Width="525">
+              Title="Google Play Music" Height="768" Width="1024">
+    
     <Grid>
-        
+        <awe:WebControl Name="Browser" Loaded="Browser_OnLoaded" Source="http://music.google.com" />
     </Grid>
 </metro:Window>

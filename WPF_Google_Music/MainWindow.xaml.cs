@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
+using System.Windows.Forms;
 using System.Windows.Shapes;
+using Awesomium.Core;
+using Application = System.Windows.Forms.Application;
+using Path = System.IO.Path;
 
 namespace WPF_Google_Music
 {
@@ -20,9 +14,32 @@ namespace WPF_Google_Music
     /// </summary>
     public partial class MainWindow : Elysium.Controls.Window
     {
+        public string SessionPath 
+        {
+            get
+            {
+                return String.Format("{0}{1}Cache", Path.GetDirectoryName(Application.ExecutablePath),
+                                     Path.DirectorySeparatorChar, Guid.NewGuid());
+            }
+        }
+
         public MainWindow()
         {
+            var webSession = WebCore.CreateWebSession(SessionPath, new WebPreferences()
+                {
+                    Javascript = true,
+                    AllowInsecureContent = true,
+                    CustomCSS = "#gbx3,gbz,gbzw { display: none !important; }",
+                    WebAudio = true,
+                    Plugins = true
+                });
             InitializeComponent();
+            Browser.WebSession = webSession;
+        }
+
+        private void Browser_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
