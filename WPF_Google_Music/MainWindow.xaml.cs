@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Input;
 using System.Windows.Shapes;
 using Awesomium.Core;
 using Application = System.Windows.Forms.Application;
@@ -14,6 +15,8 @@ namespace WPF_Google_Music
     /// </summary>
     public partial class MainWindow : Elysium.Controls.Window
     {
+        private GlobalHotKey hotKey;
+
         public string SessionPath 
         {
             get
@@ -34,11 +37,28 @@ namespace WPF_Google_Music
                 });
             InitializeComponent();
             Browser.WebSession = webSession;
+            hotKey = new GlobalHotKey(this);
         }
 
         private void Browser_OnLoaded(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        public void GlobalKeyPressed(Keys key, ModifierKeys modifier)
+        {
+            if (modifier != ModifierKeys.None) return;
+
+            if (key == Keys.MediaPlayPause)
+            {
+                PlayPressed();
+            } else if (key == Keys.MediaNextTrack)
+            {
+                NextPressed(); ;
+            } else if (key == Keys.MediaPreviousTrack)
+            {
+                PrevPressed();
+            }
         }
 
         public void PlayPressed()

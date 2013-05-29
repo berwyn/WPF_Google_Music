@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
 using System.Windows.Interop;
 using Elysium.Controls;
 
@@ -18,7 +19,7 @@ namespace WPF_Google_Music
         public const int WM_HOTKEY = 0x0312;
 
         private readonly Window _mainWindow;
-        WindowInteropHelper _host;
+        readonly WindowInteropHelper _host;
 
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -28,7 +29,7 @@ namespace WPF_Google_Music
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
-        public GlobalHotKey(Window mainWindow, int keyWatched;)
+        public GlobalHotKey(Window mainWindow)
         {
             _mainWindow = mainWindow;
             _host = new WindowInteropHelper(_mainWindow);
@@ -46,7 +47,11 @@ namespace WPF_Google_Music
 
             if (msg.message == WM_HOTKEY)
             {
+                // get the keys.
+                Keys key = (Keys)(((int)msg.lParam >> 16) & 0xFFFF);
+                ModifierKeys modifier = (ModifierKeys)((int)msg.lParam & 0xFFFF);
                 // TODO Handle the hotkey press
+                mainWindow.GlobalKeyPressed(key, modifier);
             }
         }
 

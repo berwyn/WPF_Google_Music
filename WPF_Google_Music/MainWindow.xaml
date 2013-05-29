@@ -7,11 +7,23 @@
               xmlns:core="clr-namespace:Awesomium.Core;assembly=Awesomium.Core"
               xmlns:local="clr-namespace:WPF_Google_Music"
               params:Design.Theme="Light"
-              params:Design.AccentBrush="{x:Static metro:AccentBrushes.Purple}"
-              params:Design.ContrastBrush="White"
-              Title="Google Play Music" Height="768" Width="1024">
+              params:Design.AccentBrush="{x:Static metro:AccentBrushes.Blue}"
+              params:Design.ContrastBrush="Black"
+              params:Manager.Theme="Light"
+              params:Manager.AccentBrush="{x:Static metro:AccentBrushes.Blue}"
+              params:Manager.ContrastBrush="Black"
+              Title="Google Play Music" Height="768" Width="1024" BorderThickness="2" HasDropShadow="True">
+
+    <Window.BitmapEffect>
+        <OuterGlowBitmapEffect GlowSize="15" Opacity="0.4" GlowColor="{DynamicResource {x:Static SystemColors.HotTrackColorKey}}" />
+    </Window.BitmapEffect>
     
-    <Grid>
+    <DockPanel LastChildFill="true" >
+        <StatusBar DockPanel.Dock="Bottom" Background="White">
+            <StatusBarItem>
+                <TextBlock>Ready</TextBlock>
+            </StatusBarItem>
+        </StatusBar>
         <awe:WebControl Name="Browser" Loaded="Browser_OnLoaded" Source="http://music.google.com" />
-    </Grid>
+    </DockPanel>
 </metro:Window>
