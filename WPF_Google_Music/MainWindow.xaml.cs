@@ -63,17 +63,17 @@ namespace WPF_Google_Music
 
         public void PlayPressed()
         {
-            Browser.ExecuteJavascript("alert('Play pressed!');");
+            Browser.ExecuteJavascript("$('button[data-id=play-pause').click();");
         }
 
         public void NextPressed()
         {
-            Browser.ExecuteJavascript("alert('Next pressed!');");
+            Browser.ExecuteJavascript("$('button[data-id=forward').click();");
         }
 
         public void PrevPressed()
         {
-            Browser.ExecuteJavascript("alert('Prev pressed!');");
+            Browser.ExecuteJavascript("$('button[data-id=rewind').click();");
         }
     }
 }
